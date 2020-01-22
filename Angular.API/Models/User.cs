@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Angular.API.Models
 {
@@ -22,6 +23,9 @@ namespace Angular.API.Models
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
+
+        // [JsonIgnore]
+        // public ICollection<User> Users { get; set; }
 
     }
 }
