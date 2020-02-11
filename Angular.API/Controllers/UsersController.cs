@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Angular.API.Data;
+using Angular.API.DTO;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +14,12 @@ namespace Angular.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IDatingRepository _repo;
+        private readonly IMapper _mapper;
 
-        public UsersController(IDatingRepository repo)
+        public UsersController(IDatingRepository repo, IMapper mapper)
         {
-            this._repo = repo;
+            _mapper = mapper;
+            _repo = repo;
         }
 
         [AllowAnonymous]
@@ -23,7 +28,9 @@ namespace Angular.API.Controllers
         {
             var users = await _repo.GetUsers();
 
-            return Ok(users);
+            var usersToReturn = _mapper.Map<IEnumerable<UserForListDTO>>(users);
+
+            return Ok(usersToReturn);
         }
 
         [AllowAnonymous]
@@ -32,7 +39,9 @@ namespace Angular.API.Controllers
         {
             var user = await _repo.GetUser(id);
 
-            return Ok(user);
+            var userToReturn = _mapper.Map<UserForDetailedDTO>(user);
+
+            return Ok(userToReturn);
         }
 
     }
