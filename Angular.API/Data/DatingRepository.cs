@@ -22,6 +22,13 @@ namespace Angular.API.Data
             _context.Remove(entity);
         }
 
+        public Task<Photo> GetPhoto(int Id)
+        {
+            var photo = _context.Photos.FirstOrDefaultAsync(p => p.Id == Id);
+
+            return photo;
+        }
+
         public async Task<User> GetUser(int Id)
         {
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == Id);

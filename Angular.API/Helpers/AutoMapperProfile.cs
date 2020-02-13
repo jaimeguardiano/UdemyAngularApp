@@ -21,6 +21,8 @@ namespace Angular.API.Helpers
                     opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotosForDetailedDTO>();
             CreateMap<UserForUpdateDTO, User>();
+            CreateMap<Photo, PhotosForReturnDto>();
+            CreateMap<Photo, PhotosForDetailedDTO>();
         }
     }
 }
