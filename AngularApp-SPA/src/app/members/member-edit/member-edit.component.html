@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-sm-4">
         <div class="card">
-          <img class="card-img-top img-thumbnail" src="{{photoUrl}}" alt="{{user.knownAs}}">
+          <img class="card-img-top img-thumbnail" src="{{photoUrl || '../../../assets/user.png'}}" alt="{{user.knownAs}}">
           <div class="card-body">
             <div>
               <strong>Location: </strong>
@@ -24,11 +24,11 @@
             </div>
             <div>
               <strong>Last Active: </strong>
-              <p>{{user.lastActive}}</p>
+              <p>{{user.lastActive | timeAgo}}</p>
             </div>
             <div>
               <strong>Member since: </strong>
-              <p>{{user.created}}</p>
+              <p>{{user.created | date: 'mediumDate'}}</p>
             </div>
           </div>
           <div class="card-footer">
@@ -49,12 +49,12 @@
               [(ngModel)]="user.lookingFor"></textarea>
               <h4>Interests</h4>
               <textarea name="interests" rows="6" class="form-control"
-              [(ngModel)]="user.interests"></textarea>
+              [(ngModel)]="user.interest"></textarea>
               <h4>Location Details: </h4>
               <div class="form-inline">
-                <label for="city">City</label>
-                <input type="text" class="form-control" name="city" [(ngModel)]="user.city">
-                <label for="country">Country</label>
+                <label for="city" class="mr-3">City</label>
+                <input type="text" class="form-control mr-2" name="city" [(ngModel)]="user.city">
+                <label for="country" class="mr-3">Country</label>
                 <input type="text" class="form-control" name="country" [(ngModel)]="user.country">
               </div>
             </form>

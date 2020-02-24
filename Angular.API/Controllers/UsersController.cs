@@ -4,12 +4,14 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Angular.API.Data;
 using Angular.API.DTO;
+using Angular.API.Helpers;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Angular.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -36,7 +38,7 @@ namespace Angular.API.Controllers
         }
 
         
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await _repo.GetUser(id);

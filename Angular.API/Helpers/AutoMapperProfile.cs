@@ -24,6 +24,7 @@ namespace Angular.API.Helpers
             CreateMap<Photo, PhotosForReturnDto>();
             CreateMap<Photo, PhotosForDetailedDTO>();
             CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<UserForRegisterDto,User>();
         }
     }
 }

@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-sm-4">
         <div class="card">
-          <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}">
+          <img class="card-img-top img-thumbnail" src="{{user.photoUrl || '../../../assets/user.png'}}" alt="{{user.knownAs}}">
           <div class="card-body">
             <div>
               <strong>Location: </strong>
@@ -16,12 +16,12 @@
               <p>{{user.age}}</p>
             </div>
             <div>
-              <strong>Last Active: </strong>
-              <p>{{user.lastActive}}</p>
+            <strong>Last Active: </strong>
+              <p>{{user.lastActive | timeAgo}}</p>
             </div>
             <div>
               <strong>Member since: </strong>
-              <p>{{user.created}}</p>
+              <p>{{user.created | date: 'mediumDate'}}</p>
             </div>
           </div>
           <div class="card-footer">
@@ -36,14 +36,20 @@
       <div class="tab-panel">
         <tabset class="member-tabset">
           <tab heading="About {{user.knownAs}}">
-            <h4>Description</h4>
-            <p>{{user.introduction}}</p>
-            <h4>Looking for</h4>
-            <p>{{user.lookingFor}}</p>
+            <div *ngIf="user.introduction">
+              <h4>Description</h4>
+              <p>{{user.introduction}}</p>
+            </div>
+            <div *ngIf="user.lookingFor">
+              <h4>Looking for</h4>
+              <p>{{user.lookingFor}}</p>
+            </div>
           </tab>
           <tab heading="Interest" >
-            <h4>Interest</h4>
-            <p>{{user.interests}}</p>
+            <div *ngIf="user.interest">
+              <h4>Interest</h4>
+              <p>{{user.interest}}</p>
+            </div>
           </tab>
           <tab  heading="Photos">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
